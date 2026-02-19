@@ -8,18 +8,18 @@
 // @grant        GM_xmlhttpRequest
 // @connect      hb.396663.xyz
 // @run-at       document-end
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/filter.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/statistics.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/blacklist.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/Friends.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/Clockin.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/focus.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/quickReply.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/emojis.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/login.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/vps.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/History.js
-// @require      https://raw.githubusercontent.com/dajie111/nodeseek-userscript/refs/heads/main/notes.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/filter.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/statistics.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/blacklist.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/Friends.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/Clockin.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/focus.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/quickReply.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/emojis.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/login.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/vps.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/History.js
+// @require      https://raw.githubusercontent.com/wj2008/nodeseek-userscript/refs/heads/main/notes.js
 // ==/UserScript==
 
 (function () {

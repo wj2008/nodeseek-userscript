@@ -165,7 +165,7 @@
         async performSignIn() {
             // 检查是否开启了自动签到
             if (localStorage.getItem(STORAGE_KEYS.signEnabled) !== 'true') {
-                // this.addLog('自动签到已关闭，跳过执行');
+                this.addLog('自动签到已关闭，跳过执行');
                 return;
             }
 
@@ -178,7 +178,7 @@
                 const mode = localStorage.getItem(STORAGE_KEYS.signMode) || 'fixed';
                 const api = APIS[mode] || APIS.fixed;
                 
-                // this.addLog(`开始执行自动签到 (模式: ${mode === 'fixed' ? '固定' : '随机'})...`);
+                this.addLog(`开始执行自动签到 (模式: ${mode === 'fixed' ? '固定' : '随机'})...`);
 
                 const response = await fetch(api, {
                     method: 'POST',
@@ -194,12 +194,12 @@
                     const modeText = mode === 'fixed' ? '固定' : '随机';
                     this.addLog(`✅ 自动签到成功(${modeText})！${result.message || 'OK'}`);
                 } else {
-                    // this.addLog(`❌ 自动签到失败: ${response.status}`);
+                    this.addLog(`❌ 自动签到失败: ${response.status}`);
                 }
 
             } catch (error) {
                 // 签到异常时静默处理，但如果有日志函数则记录
-                // this.addLog(`❌ 签到出错: ${error.message}`);
+                this.addLog(`❌ 签到出错: ${error.message}`);
             }
         }
 
@@ -207,7 +207,7 @@
         setSignMode(mode) {
             if (APIS[mode]) {
                 localStorage.setItem(STORAGE_KEYS.signMode, mode);
-                // this.addLog(`已切换签到模式为: ${mode === 'random' ? '随机签到' : '固定签到'}`);
+                this.addLog(`已切换签到模式为: ${mode === 'random' ? '随机签到' : '固定签到'}`);
                 return true;
             }
             return false;
