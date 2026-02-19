@@ -189,14 +189,9 @@
                 });
 
                 // 只在签到成功时输出日志
-                if (response.ok) {
-                    const result = await response.json();
-                    const modeText = mode === 'fixed' ? '固定' : '随机';
-                    this.addLog(`✅ 自动签到成功(${modeText})！${result.message || 'OK'}`);
-                } else {
-                    this.addLog(`❌ 自动签到失败: ${response?.message}`);
-                }
-
+                const result = await response.json();
+                const modeText = mode === 'fixed' ? '固定' : '随机';
+                this.addLog(`✅ 自动签到(${modeText})！${result.message}`);
             } catch (error) {
                 // 签到异常时静默处理，但如果有日志函数则记录
                 this.addLog(`❌ 签到出错: ${error.message}`);
