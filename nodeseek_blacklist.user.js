@@ -3429,6 +3429,9 @@
             window.NodeSeekFilter.renderHighlightStatsToContainer();
         }
 
+        if (window.NodeSeekClockIn && typeof window.NodeSeekClockIn.scheduleNextHourlySign === 'function') {
+            window.NodeSeekClockIn.scheduleNextHourlySign(true);
+        }
 
         document.body.appendChild(mainContainer);
     }
@@ -5274,7 +5277,7 @@
         closeBtn.style.fontSize = '24px';
         closeBtn.style.lineHeight = '20px';
         closeBtn.style.color = '#999';
-        closeBtn.onclick = function() { dialog.remove(); };
+        closeBtn.onclick = function () { dialog.remove(); };
 
         header.appendChild(title);
         header.appendChild(closeBtn);
@@ -5299,7 +5302,7 @@
             let isDragging = false;
             let startX, startY, initialLeft, initialTop;
 
-            dragHandle.onmousedown = function(e) {
+            dragHandle.onmousedown = function (e) {
                 isDragging = true;
                 startX = e.clientX;
                 startY = e.clientY;
@@ -5311,7 +5314,7 @@
                 // 防止选中文本
                 e.preventDefault();
                 
-                document.onmousemove = function(e) {
+                document.onmousemove = function (e) {
                     if (isDragging) {
                         const dx = e.clientX - startX;
                         const dy = e.clientY - startY;
@@ -5323,7 +5326,7 @@
                     }
                 };
 
-                document.onmouseup = function() {
+                document.onmouseup = function () {
                     isDragging = false;
                     document.onmousemove = null;
                     document.onmouseup = null;
@@ -5353,7 +5356,7 @@
         userInfoSwitch.type = 'checkbox';
         userInfoSwitch.checked = getUserInfoDisplayState();
         userInfoSwitch.style.transform = 'scale(1.2)';
-        userInfoSwitch.onchange = function() {
+        userInfoSwitch.onchange = function () {
             const newState = this.checked;
             setUserInfoDisplayState(newState);
             if (newState) {
@@ -5410,7 +5413,7 @@
         colorResetBtn.style.color = '#1890ff';
         colorResetBtn.style.cursor = 'pointer';
         colorResetBtn.style.textDecoration = 'underline';
-        colorResetBtn.onclick = function() {
+        colorResetBtn.onclick = function () {
             if (confirm('确定要重置阅读记忆颜色吗？')) {
                 colorPicker.value = '#9aa0a6';
                 colorPicker.dispatchEvent(new Event('input')); // 触发实时预览
@@ -5419,12 +5422,12 @@
         };
 
         // 实时预览颜色
-        colorPicker.oninput = function() {
+        colorPicker.oninput = function () {
             const newColor = this.value;
             document.documentElement.style.setProperty('--ns-viewed-color', newColor);
         };
 
-        colorPicker.onchange = function() {
+        colorPicker.onchange = function () {
             const newColor = this.value;
             setViewedColor(newColor);
             document.documentElement.style.setProperty('--ns-viewed-color', newColor);
@@ -5445,7 +5448,7 @@
         clearHistoryBtn.style.textDecoration = 'underline';
         clearHistoryBtn.style.marginLeft = '4px'; // 增加一点间距
         clearHistoryBtn.title = '清除所有已记录的阅读历史';
-        clearHistoryBtn.onclick = function() {
+        clearHistoryBtn.onclick = function () {
             if (confirm('确定要清除所有阅读记忆吗？此操作不可恢复。')) {
                 // 清除本地存储
                 setViewedTitlesData([]);
@@ -5464,7 +5467,7 @@
         historySwitch.type = 'checkbox';
         historySwitch.checked = getViewedHistoryEnabled();
         historySwitch.style.transform = 'scale(1.2)';
-        historySwitch.onchange = function() {
+        historySwitch.onchange = function () {
             const newState = this.checked;
             setViewedHistoryEnabled(newState);
             markViewedTitles(); // 立即应用
@@ -5507,7 +5510,7 @@
         const currentSignMode = localStorage.getItem('nodeseek_sign_mode') || 'fixed';
         // 确保如果是第一次使用，也存入 fixed
         if (!localStorage.getItem('nodeseek_sign_mode')) {
-             localStorage.setItem('nodeseek_sign_mode', 'fixed');
+            localStorage.setItem('nodeseek_sign_mode', 'fixed');
         }
 
         // 固定签到单选
@@ -5517,7 +5520,7 @@
         fixedRadio.value = 'fixed';
         fixedRadio.checked = currentSignMode === 'fixed';
         fixedRadio.style.cursor = 'pointer';
-        fixedRadio.onchange = function() {
+        fixedRadio.onchange = function () {
             if (this.checked) {
                 localStorage.setItem('nodeseek_sign_mode', 'fixed');
                 if (window.NodeSeekClockIn && window.NodeSeekClockIn.setSignMode) {
@@ -5530,7 +5533,7 @@
         const fixedLabel = document.createElement('label');
         fixedLabel.textContent = '固定';
         fixedLabel.style.cursor = 'pointer';
-        fixedLabel.onclick = function() { fixedRadio.click(); };
+        fixedLabel.onclick = function () { fixedRadio.click(); };
 
         // 随机签到单选
         const randomRadio = document.createElement('input');
@@ -5539,7 +5542,7 @@
         randomRadio.value = 'random';
         randomRadio.checked = currentSignMode === 'random';
         randomRadio.style.cursor = 'pointer';
-        randomRadio.onchange = function() {
+        randomRadio.onchange = function () {
             if (this.checked) {
                 localStorage.setItem('nodeseek_sign_mode', 'random');
                 if (window.NodeSeekClockIn && window.NodeSeekClockIn.setSignMode) {
@@ -5552,7 +5555,7 @@
         const randomLabel = document.createElement('label');
         randomLabel.textContent = '随机';
         randomLabel.style.cursor = 'pointer';
-        randomLabel.onclick = function() { randomRadio.click(); };
+        randomLabel.onclick = function () { randomRadio.click(); };
 
         signModeContainer.appendChild(fixedRadio);
         signModeContainer.appendChild(fixedLabel);
@@ -5564,13 +5567,12 @@
         signSwitch.type = 'checkbox';
         signSwitch.checked = localStorage.getItem('nodeseek_sign_enabled') === 'true';
         signSwitch.style.transform = 'scale(1.2)';
-        signSwitch.onchange = function() {
+        signSwitch.onchange = function () {
             const newState = this.checked;
             localStorage.setItem('nodeseek_sign_enabled', newState.toString());
             addLog('自动签到：' + (newState ? '开启' : '关闭'));
             // 立即触发一次状态更新（如果是开启）
             if (newState && window.NodeSeekClockIn && window.NodeSeekClockIn.scheduleNextHourlySign) {
-                addLog('自动签到：scheduleNextHourlySign');
                 window.NodeSeekClockIn.scheduleNextHourlySign(true);
             }
         };
