@@ -108,6 +108,9 @@
             });
         }
 
+        getCurrentDateFormatted(date) {
+            return date.getFullYear() + (date.getMonth() + 1).toString().padStart(2, '0') + date.getDate().toString().padStart(2, '0');
+        }
         // 计算并设置下一个整点签到
         scheduleNextHourlySign(force = false) {
             if (!this.isMaster) return;
@@ -142,9 +145,15 @@
                 lastSignTime = new Date(parseInt(lastSignTimeStr));
                 lastSignHour = lastSignTime.getHours();
             }
+            const today = this.getCurrentDateFormatted(now);
+            const lastDay = lastSignTime ? this.getCurrentDateFormatted(lastSignTime) : '';
+            this.addLog(`上次签到: ${lastDay}, 当前签到: ${today}, 强制: ${force}`);
+            if (force && lastDay !== today) {
+                this.performSignIn();
+            }
             
             // 如果当前是整点(00分00秒)且这个小时还没签到过，立即签到
-            if (force || (now.getMinutes() === 0 && now.getSeconds() === 0 && lastSignHour !== currentHour)) {
+            if (now.getMinutes() === 0 && now.getSeconds() === 0 && lastSignHour !== currentHour) {
                 this.performSignIn();
             }
 
