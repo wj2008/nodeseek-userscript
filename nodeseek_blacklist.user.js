@@ -5571,7 +5571,7 @@
             
             // 立即触发一次状态更新（如果是开启）
              if (newState && window.NodeSeekClockIn && window.NodeSeekClockIn.scheduleNextHourlySign) {
-                 window.NodeSeekClockIn.scheduleNextHourlySign();
+                 window.NodeSeekClockIn.scheduleNextHourlySign(true);
              }
         };
 

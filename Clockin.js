@@ -109,7 +109,7 @@
         }
 
         // 计算并设置下一个整点签到
-        scheduleNextHourlySign() {
+        scheduleNextHourlySign(force = false) {
             if (!this.isMaster) return;
             
             // 清除可能存在的旧定时器
@@ -144,7 +144,7 @@
             }
             
             // 如果当前是整点(00分00秒)且这个小时还没签到过，立即签到
-            if (now.getMinutes() === 0 && now.getSeconds() === 0 && lastSignHour !== currentHour) {
+            if (force || (now.getMinutes() === 0 && now.getSeconds() === 0 && lastSignHour !== currentHour)) {
                 this.performSignIn();
             }
 
@@ -159,6 +159,7 @@
             
             // 将定时器ID添加到timers数组中，以便清理
             this.timers.push(this.nextSignTimer);
+            this.addLog(`${force}, 已设置下一个整点签到，时间：${nextHour.toLocaleString()}`);
         }
 
         // 执行签到API
