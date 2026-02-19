@@ -110,6 +110,7 @@
 
         // 计算并设置下一个整点签到
         scheduleNextHourlySign(force = false) {
+            this.addLog(`scheduleNextHourlySign ${force}, ${this.isMaster}`);
             if (!this.isMaster) return;
             
             // 清除可能存在的旧定时器
@@ -164,6 +165,7 @@
 
         // 执行签到API
         async performSignIn() {
+            this.addLog(`performSignIn`);
             // 检查是否开启了自动签到
             if (localStorage.getItem(STORAGE_KEYS.signEnabled) !== 'true') {
                 this.addLog('自动签到已关闭，跳过执行');

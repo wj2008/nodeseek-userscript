@@ -5568,11 +5568,11 @@
             const newState = this.checked;
             localStorage.setItem('nodeseek_sign_enabled', newState.toString());
             addLog('自动签到：' + (newState ? '开启' : '关闭'));
-            
             // 立即触发一次状态更新（如果是开启）
-             if (newState && window.NodeSeekClockIn && window.NodeSeekClockIn.scheduleNextHourlySign) {
-                 window.NodeSeekClockIn.scheduleNextHourlySign(true);
-             }
+            if (newState && window.NodeSeekClockIn && window.NodeSeekClockIn.scheduleNextHourlySign) {
+                addLog('自动签到：scheduleNextHourlySign');
+                window.NodeSeekClockIn.scheduleNextHourlySign(true);
+            }
         };
 
         signRightContainer.appendChild(signModeContainer);
